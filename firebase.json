@@ -9,12 +9,8 @@
     ],
     "rewrites": [
       {
-        "source": "/api/widgets/pfp",
-        "destination": "/widgets/pfp.html"
-      },
-      {
-        "source": "/faq",
-        "destination": "/pages/faq.html"
+        "source": "/display",
+        "destination": "/pages/display.html"
       },
       {
         "source": "**",

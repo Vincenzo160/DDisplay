@@ -595,14 +595,13 @@ header {
         background-color: var(--main-hover-color);
     }
 input[type=text], select, textarea {    
-    width: 100%; 
-    margin-bottom: 5px;
+    color: white; 
+    width: 100%;    
     padding: 12px;    
-    background-color: var(--third-color);
-    color: white;
-    border: 1px solid rgb(70, 68, 68);    
-    border-radius: 50px;    
-    resize: vertical;    
+    border: 1px solid rgb(70, 68, 68);   
+    background-color: #121212; 
+    border-radius: 8px;    
+    resize: vertical;      
 }    
 input[type=password], select, textarea {    
     width: 100%;    
