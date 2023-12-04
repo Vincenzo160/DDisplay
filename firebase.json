@@ -1,0 +1,25 @@
+{
+  "hosting": {
+    "site": "ddisplay-e3562",
+    "public": "/",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/widgets/pfp",
+        "destination": "/widgets/pfp.html"
+      },
+      {
+        "source": "/faq",
+        "destination": "/pages/faq.html"
+      },
+      {
+        "source": "**",
+        "destination": "pages/index.html"
+      }
+    ]
+  }
+}

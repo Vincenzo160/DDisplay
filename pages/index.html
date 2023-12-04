@@ -1,0 +1,38 @@
+<head>
+  <title>DDisplay</title>
+  <link rel="icon" href="https://sgt-bots.github.io/SGT-Bots-Website/assets/favcon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">   
+  <link id="stylesheet" rel="stylesheet" href="/style/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="/scripts/handler.js" type="module"></script>
+</head>
+<header>
+    <h1 class="logo">DDisplay</h1>
+	<nav>
+        <ul class="nav-area top-nav">
+			<li><a href="/">Home</a></li>
+			<li><a href="" onclick="alert('Coming Soon')">Manage</a></li>
+		</ul>
+	</nav>
+</header>
+<!-- feature start -->
+<div class="features-grid">
+    <div class="feature feature1">
+        <i class="fa fa-tv"></i>
+        <h4>Display</h4>
+        <p>Use this device as a display</p>
+        <input type="tel" id="code-d" pattern="^(?!\s)(.*\S)?(?<!\s)$" minlength="7" maxlength="7" placeholder="DDisplay Code">
+        <input class="home-btn3" id="connectDisplay" value="Connect" type="submit">
+    </div>
+    <!-- feature end -->
+    <!-- feature start -->
+    <div class="feature feature2">
+        <i class="fa fa-gears"></i>
+        <h4>Manage</h4>
+        <p>Manage another display</p>
+        <input disabled type="tel" id="code-m" maxlength="500" placeholder="DDisplay Code">
+        <input class="btn-disabled" id="connectManage" value="Coming Soon" type="submit">
+
+    </div>
+    <!-- feature end -->
+</div>
