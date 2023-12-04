@@ -4,6 +4,12 @@ function getDDcode(){
     return myParam
 }
 
+function throwError(error,loud) {
+    document.getElementById("status").innerHTML = "E:"+error;
+    if (loud) {
+        alert("An Error occured E:"+error)
+    }
+}
 
 
-export {getDDcode}
+export {getDDcode,throwError}

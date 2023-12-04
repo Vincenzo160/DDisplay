@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-import { getDDcode } from "/scripts/util.js";
+import { getDDcode, throwError } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,6 +40,8 @@ get(child(dbRef, 'display/'+DDcode+'/info/time')).then((snapshot) => {
     startClock(snapshot.val())
 } else {
     console.log("No data available");
+    throwError("C404", false)
+    document.getElementById("status").innerHTML = "E:C404";
 }
 }).catch((error) => {
     console.error(error);
