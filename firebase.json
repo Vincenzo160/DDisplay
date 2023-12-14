@@ -9,6 +9,10 @@
     ],
     "rewrites": [
       {
+        "source": "/manage",
+        "destination": "/pages/manage.html"
+      },
+      {
         "source": "/display",
         "destination": "/pages/display.html"
       },
