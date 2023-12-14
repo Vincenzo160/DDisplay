@@ -3,6 +3,7 @@
   <link rel="icon" href="https://sgt-bots.github.io/SGT-Bots-Website/assets/favcon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">   
   <link id="stylesheet" rel="stylesheet" href="/style/main.css">
+  <link id="stylesheet" rel="stylesheet" href="/style/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="/scripts/handler.js" type="module"></script>
 </head>
@@ -30,9 +31,16 @@
         <i class="fa fa-gears"></i>
         <h4>Manage</h4>
         <p>Manage another display</p>
-        <input disabled type="text" id="code-m" maxlength="500" placeholder="DDisplay Code">
-        <input class="btn-disabled" id="connectManage" value="Coming Soon" type="submit">
+        <input type="text" id="code-m" pattern="^(?!\s)(.*\S)?(?<!\s)$" minlength="7" maxlength="7" placeholder="DDisplay Code">
+        <input class="home-btn3" id="connectManage" value="Manage" type="submit">
 
     </div>
     <!-- feature end -->
 </div>
+<!-- footer -->
+<footer>
+    <p>
+		<a href="https://github.com/Vincenzo160/DDisplay"><i class="fa fa-github"></i></a>
+    </p>
+</footer>
+<!-- footer end -->

@@ -2,7 +2,7 @@
     <title>DDisplay | Manage</title>
     <link rel="icon" href="https://sgt-bots.github.io/SGT-Bots-Website/assets/favcon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">   
-    <link id="stylesheet" rel="stylesheet" href="/style/manage.css">
+    <link id="stylesheet" rel="stylesheet" href="/style/display.css">
     <link id="stylesheet" rel="stylesheet" href="/style/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/scripts/manage.js" type="module"></script>
@@ -17,22 +17,14 @@
 		</ul>
 	</nav>
 </header>
-<div class="dash" align="center">
-    <h1>CODE</h1>
-    <div class="container">
-        <h2 align="left">1. Image</h2>
-        <div class="type-container">
-            <label for="type-selector">Type:</label>
-            <select name="type" class="type-selector">
-                <option value="default" autofocus>Select Type</option>
-                <optgroup label="Media">
-                    <option value="type-image">Image</option>
-                    <option value="type-video">Video</option>
-                </optgroup>
-                <optgroup label="Other">
-                    <option value="type-text">Text</option>
-                </optgroup>
-            </select>
-        </div>
-    </div>
+<div id="dash" class="dash" align="center">
+    <h1 id="id-display" >Loading..</h1>
+    <br>
+
+    <!-- PopulateDash()@manage.js here -->
 </div>
+<footer id="status-label">
+    <p id="status">
+        Loading..
+    </p>
+</footer>

@@ -4,10 +4,14 @@ function getDDcode(){
     return myParam
 }
 
-function throwError(error,loud) {
+function throwError(error,loud,long) {
     document.getElementById("status").innerHTML = "E:"+error;
     if (loud) {
-        alert("An Error occured E:"+error)
+        if (long === undefined || long === null) {
+            alert("An Error occured E:"+error)
+        } else {
+            alert(long+" E:"+error)
+        }
     }
 }
 
