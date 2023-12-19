@@ -20,3 +20,9 @@ footer {
     color: white;
     text-align: center;
 }
+
+@media all and (max-width:900px) {
+    footer {
+        visibility: hidden;
+    }
+}
