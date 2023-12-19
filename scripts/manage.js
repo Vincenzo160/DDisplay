@@ -27,6 +27,13 @@ console.log(DDcode)
 
 document.getElementById("id-display").innerHTML = DDcode;
 
+document.getElementById('saveBTN').addEventListener('click', function(e) {
+    save()
+});
+document.getElementById('viewBTN').addEventListener('click', function(e) {
+    window.open("https://ddisplay.sgtbots.com/display?id="+DDcode, '_blank')
+});
+
 const dbRef = ref(getDatabase());
 get(child(dbRef, `display/`+DDcode)).then((snapshot) => {
   const data = snapshot.val()
@@ -55,6 +62,7 @@ function PopulateDash(data) {
         if (content.type === "image") {
             let srcInput = document.createElement("input");
             srcInput.type = "text"
+            srcInput.id = "url"+slide
             srcInput.value = content.url
             box.appendChild(srcInput);
         } else {
@@ -74,8 +82,40 @@ function PopulateDash(data) {
     let timeInput = document.createElement("input");
     timeInput.type = "tel"
     timeInput.value = data.info.time
+    timeInput.id = "Intime"
     box.appendChild(title);
     box.appendChild(timeInput);
     document.getElementById("dash").appendChild(box);
     document.getElementById("status-label").style.display = "none";
+}
+
+function save() {
+    var slide = 0
+    var DDcode = getDDcode()
+    get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
+    const data = snapshot.val()
+    if (snapshot.exists()) {
+        console.log(snapshot.val());
+        while (slide <= data) {
+            set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                id: slide,
+                type: "image", // TODO: Implement in a non hardcoded way
+                url: document.getElementById("url"+slide).value,
+            });
+            slide = slide+1
+            console.log(slide)
+        }
+        set(ref(db, 'display/' + DDcode + '/info'), {
+            count: data,
+            time: document.getElementById("Intime").value
+        });
+        alert("Data saved.")
+
+        } else {
+            console.log("No data available");
+            throwError("C404", false)
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
 }
