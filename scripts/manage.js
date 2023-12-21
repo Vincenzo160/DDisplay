@@ -27,6 +27,12 @@ console.log(DDcode)
 
 document.getElementById("id-display").innerHTML = DDcode;
 
+document.getElementById('remslBTN').addEventListener('click', function(e) {
+    removeSlide()
+});
+document.getElementById('addslBTN').addEventListener('click', function(e) {
+    addSlide()
+});
 document.getElementById('saveBTN').addEventListener('click', function(e) {
     save()
 });
@@ -43,6 +49,7 @@ get(child(dbRef, `display/`+DDcode)).then((snapshot) => {
     } else {
         console.log("No data available");
         throwError("C404", false)
+        document.getElementById("commands").style.display = "none";
     }
 }).catch((error) => {
     console.error(error);
@@ -109,12 +116,56 @@ function save() {
             count: data,
             time: document.getElementById("Intime").value
         });
-        alert("Data saved.")
 
         } else {
             console.log("No data available");
             throwError("C404", false)
         }
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
+function addSlide() {
+    var DDcode = getDDcode()
+    get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
+    const data = snapshot.val()
+    if (snapshot.exists()) {
+
+        set(ref(db, 'display/' + DDcode + '/content'+(data+1)), {
+            id: data+1,
+            type: "image", // TODO: Implement in a non hardcoded way
+            url: "url",
+        });
+        set(ref(db, 'display/' + DDcode + '/info'), {
+            count: data+1,
+            time: document.getElementById("Intime").value
+        });
+        window.location.reload()
+    } else {
+        console.log("No data available");
+        throwError("C404", false)
+    }
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
+function removeSlide() {
+    var DDcode = getDDcode()
+    get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
+    const data = snapshot.val()
+    if (snapshot.exists()) {
+        remove(ref(db, 'display/' + DDcode + '/content'+data))
+        set(ref(db, 'display/' + DDcode + '/info'), {
+            count: data-1,
+            time: document.getElementById("Intime").value
+        });
+        window.location.reload()
+    } else {
+        console.log("No data available");
+        throwError("C404", false)
+    }
     }).catch((error) => {
         console.error(error);
     });
