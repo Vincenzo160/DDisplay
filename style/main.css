@@ -74,10 +74,6 @@ h1 {
     display: block;
 }
 
-.fa {
-    color: white
-}
-
 .none {
     all:unset;
 }
@@ -577,8 +573,8 @@ header {
     }
     .home-btn3 {
         margin-top: 15px;
-        width: 60px;
-        padding: 8px 20px;
+        width: auto;
+        padding: 8px 50px;
         border-radius: 50px;
         border: none;
         background: var(--main-color);
@@ -587,7 +583,6 @@ header {
         font-size: 20px;
         cursor: pointer;
         transition: .35s;
-        animation-name: enterbtn1;
         animation-duration: 600ms;
     }
 
