@@ -15,5 +15,9 @@ function throwError(error,loud,long) {
     }
 }
 
+function setCookie(name,value) {
 
-export {getDDcode,throwError}
+    document.cookie = name+"="+ value +"; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+}
+
+export {getDDcode,throwError, setCookie}

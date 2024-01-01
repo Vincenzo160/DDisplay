@@ -26,9 +26,15 @@ console.log(DDcode)
 var data = undefined
 const urlsRef = ref(db, 'display/' + DDcode);
 onValue(urlsRef, (snapshot) => {
+    const debugElement = document.getElementById("debug");
     const urls = snapshot.val();
-    if (!(urls === null || urls === "")) {
-        //Error!
+    console.log(urls);
+    if (debugElement.innerHTML === "null" || debugElement.innerHTML === urls) {
+        debugElement.innerHTML = JSON.stringify(urls);
+        console.log(debugElement.innerHTML);
+
+    } else {
+        location.reload();
     }
     data = urls
 
@@ -52,7 +58,7 @@ function startClock(delay) {
     document.getElementById("status-label").style.display = "none";
     var intCount = -1
     
-    setInterval(function() {
+    function execute() {
         if (intCount >= data.info.count) {intCount = -1}
         intCount = intCount +1
         if (data === undefined || data === null) {
@@ -64,5 +70,7 @@ function startClock(delay) {
         console.log(data[`content${intCount}`].url)
         document.getElementById("img-content").setAttribute("src", data[`content${intCount}`].url);
         
-      }, delay);
+        setTimeout(execute, delay);
+    }
+    execute();
 }

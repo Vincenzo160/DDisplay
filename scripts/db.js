@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { setCookie } from "/scripts/util.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -18,3 +19,34 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+function createDisplay() {
+  const epochTime = Date.now();
+  const randomNumber = Math.floor(Math.random() * 10001);
+  const result = String(epochTime/randomNumber);
+  console.log(result)
+  const hashedResult = CryptoJS.SHA256(result).toString();
+  const truncatedHashedResult = hashedResult.substring(0, 15);
+  console.log(hashedResult);
+  console.log(truncatedHashedResult);
+
+  const db = getDatabase();
+  set(ref(db, 'display/' + truncatedHashedResult+"/info"), {
+    count: 0,
+    time: 10000
+  }).then(() => {
+    return set(ref(db, 'display/' + truncatedHashedResult+"/content0"), {
+      id: 1,
+      type: "image",
+      url: "placeholder",
+    });
+  }).then(() => {
+    setCookie("DDcode", truncatedHashedResult)
+    window.location.href = "/manage?id="+ truncatedHashedResult
+  }).catch((error) => {
+    console.error(error);
+  });
+
+}
+
+
+export { createDisplay }
