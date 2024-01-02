@@ -69,6 +69,11 @@ function startClock(delay) {
     
         console.log(data[`content${intCount}`].url)
         document.getElementById("img-content").setAttribute("src", data[`content${intCount}`].url);
+        if (data[`content${intCount}`].type === "text") {
+            document.body.style.backgroundColor = data[`content${intCount}`].bgColor
+        } else {
+            document.body.style.backgroundColor = "#121212"
+        }
         
         setTimeout(execute, delay);
     }

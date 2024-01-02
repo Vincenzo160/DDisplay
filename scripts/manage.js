@@ -33,6 +33,10 @@ document.getElementById('remslBTN').addEventListener('click', function(e) {
 document.getElementById('addslBTN').addEventListener('click', function(e) {
     addSlide()
 });
+addslSEL.addEventListener("change", (event) => {
+    var selection = event.target.value
+    addSlide(selection)
+})
 document.getElementById('saveBTN').addEventListener('click', function(e) {
     save()
 });
@@ -64,6 +68,7 @@ function PopulateDash(data) {
 
         let title = document.createElement("h2");
         title.align="left"
+        title.id="type"+slide
         title.innerHTML = slide+1+". "+content.type
         box.appendChild(title);
         if (content.type === "image") {
@@ -72,6 +77,41 @@ function PopulateDash(data) {
             srcInput.id = "url"+slide
             srcInput.value = content.url
             box.appendChild(srcInput);
+        } else if (content.type === "text") {
+            //text
+            let txtInput = document.createElement("textarea");
+            txtInput.id = "text"+slide
+            txtInput.value = content.txt
+            txtInput.setAttribute('maxlength', '60');
+            box.appendChild(txtInput);
+            // Div
+            let colDiv = document.createElement("div");
+            colDiv.align="left"
+            box.appendChild(colDiv);
+            // Color selector lable
+            let colTxtLabel = document.createElement("label");
+            colTxtLabel.innerHTML = "Text Color: "
+            colDiv.appendChild(colTxtLabel);
+
+            // Color selector text
+            let colTxtInput = document.createElement("input");
+            colTxtInput.type = "color"
+            colTxtInput.id = "txtColor"+slide
+            colTxtInput.value = content.txtColor
+            colDiv.appendChild(colTxtInput);
+            // br
+            let brake = document.createElement("br");
+            colDiv.appendChild(brake);
+            // Color selector lable
+            let colBgLabel = document.createElement("label");
+            colBgLabel.innerHTML = "Background Color: "
+            colDiv.appendChild(colBgLabel);
+            // Color selector bg
+            let colBgInput = document.createElement("input");
+            colBgInput.type = "color"
+            colBgInput.id = "bgColor"+slide
+            colBgInput.value = content.bgColor
+            colDiv.appendChild(colBgInput);
         } else {
             throwError("D10"+slide,true,"Error Parsing "+slide)
             window.location.replace("/")
@@ -104,11 +144,28 @@ function save() {
     if (snapshot.exists()) {
         console.log(snapshot.val());
         while (slide <= data) {
-            set(ref(db, 'display/' + DDcode + '/content'+slide), {
-                id: slide,
-                type: "image", // TODO: Implement in a non hardcoded way
-                url: document.getElementById("url"+slide).value,
-            });
+            var type = document.getElementById("type"+slide).innerHTML.replace(/\d|\s|\./g, '');
+            console.log(type)
+            if (type === "text") {
+                var resolution = "1920x1080" // TODO: Implement in a non hardcoded way
+                var bgColor = document.getElementById("bgColor"+slide).value
+                var txtColor = document.getElementById("txtColor"+slide).value
+                var txt = document.getElementById("text"+slide).value
+                set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                    id: slide,
+                    type: "text",
+                    txt: txt,
+                    txtColor: txtColor,
+                    bgColor: bgColor,
+                    url: "https://placehold.co/"+resolution+"/"+bgColor.substring(1)+"/"+txtColor.substring(1)+"?text="+encodeURIComponent(txt)
+                });
+            } else {
+                set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                    id: slide,
+                    type: "image",
+                    url: document.getElementById("url"+slide).value,
+                });
+            }
             slide = slide+1
             console.log(slide)
         }
@@ -126,7 +183,7 @@ function save() {
     });
 }
 
-function addSlide() {
+function addSlide(type) {
     var DDcode = getDDcode()
     get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
     const data = snapshot.val()
@@ -134,7 +191,7 @@ function addSlide() {
 
         set(ref(db, 'display/' + DDcode + '/content'+(data+1)), {
             id: data+1,
-            type: "image", // TODO: Implement in a non hardcoded way
+            type: type, // TODO: Implement in a non hardcoded way
             url: "url",
         });
         set(ref(db, 'display/' + DDcode + '/info'), {

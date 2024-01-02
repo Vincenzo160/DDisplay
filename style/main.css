@@ -589,7 +589,7 @@ header {
     .home-btn:hover3 {
         background-color: var(--main-hover-color);
     }
-input[type=text], select, textarea {    
+input[type=text], textarea {    
     color: white; 
     width: 100%;    
     padding: 12px;    
@@ -598,7 +598,7 @@ input[type=text], select, textarea {
     border-radius: 8px;    
     resize: vertical;      
 }    
-input[type=password], select, textarea {    
+input[type=password], textarea {    
     width: 100%;    
     padding: 12px;    
     background-color: var(--third-color);
@@ -607,7 +607,7 @@ input[type=password], select, textarea {
     border-radius: 50px;    
     resize: vertical;      
 }    
-input[type=tel], select, textarea {   
+input[type=tel], textarea {   
   color: white; 
   width: 100%;    
   padding: 12px;    
@@ -616,7 +616,7 @@ input[type=tel], select, textarea {
   border-radius: 8px;    
   resize: vertical;    
 }    
-input[type=subject], select, textarea {    
+input[type=subject], textarea {    
   width: 100%;    
   padding: 12px;    
   border: 1px solid rgb(70, 68, 68);    
@@ -672,9 +672,6 @@ textarea:focus {
     box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) +
           40%), 0.8);
     outline: 3px solid transparent;
-}
-select {
-    color: #757575;
 }
 
 .url-list {
