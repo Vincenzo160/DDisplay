@@ -154,19 +154,23 @@ function addSlide() {
 function removeSlide() {
     var DDcode = getDDcode()
     get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
-    const data = snapshot.val()
-    if (snapshot.exists()) {
-        remove(ref(db, 'display/' + DDcode + '/content'+data))
-        set(ref(db, 'display/' + DDcode + '/info'), {
-            count: data-1,
-            time: document.getElementById("Intime").value
-        });
-        window.location.reload()
-    } else {
-        console.log("No data available");
-        throwError("C404", false)
-    }
-    }).catch((error) => {
-        console.error(error);
+        const data = snapshot.val()
+        if (data <= 0) {
+            throwError("D100", true, "Cannot remove slide 0")
+            return
+        }
+        if (snapshot.exists()) {
+            remove(ref(db, 'display/' + DDcode + '/content'+data))
+            set(ref(db, 'display/' + DDcode + '/info'), {
+                count: data-1,
+                time: document.getElementById("Intime").value
+            });
+            window.location.reload()
+        } else {
+            console.log("No data available");
+            throwError("C404", false)
+        }
+        }).catch((error) => {
+            console.error(error);
     });
 }
