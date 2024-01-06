@@ -37,7 +37,7 @@ function createDisplay() {
     return set(ref(db, 'display/' + truncatedHashedResult+"/content0"), {
       id: 1,
       type: "image",
-      url: "placeholder",
+      url: "Image url",
     });
   }).then(() => {
     setCookie("DDcode", truncatedHashedResult)

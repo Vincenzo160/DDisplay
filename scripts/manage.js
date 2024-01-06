@@ -192,7 +192,7 @@ function addSlide(type) {
         set(ref(db, 'display/' + DDcode + '/content'+(data+1)), {
             id: data+1,
             type: type, // TODO: Implement in a non hardcoded way
-            url: "url",
+            url: "Image url",
         });
         set(ref(db, 'display/' + DDcode + '/info'), {
             count: data+1,
