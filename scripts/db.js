@@ -28,24 +28,32 @@ function createDisplay() {
   const truncatedHashedResult = hashedResult.substring(0, 15);
   console.log(hashedResult);
   console.log(truncatedHashedResult);
-
   const db = getDatabase();
-  set(ref(db, 'display/' + truncatedHashedResult+"/info"), {
-    count: 0,
-    time: 10000
-  }).then(() => {
-    return set(ref(db, 'display/' + truncatedHashedResult+"/content0"), {
-      id: 1,
-      type: "image",
-      url: "Image url",
-    });
-  }).then(() => {
-    setCookie("DDcode", truncatedHashedResult)
-    window.location.href = "/manage?id="+ truncatedHashedResult
+  const displayRef = ref(db, 'display/' + truncatedHashedResult);
+
+  get(displayRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      createDisplay()
+    } else {
+      set(ref(db, 'display/' + truncatedHashedResult+"/info"), {
+        count: 0,
+        time: 10000
+      }).then(() => {
+        return set(ref(db, 'display/' + truncatedHashedResult+"/content0"), {
+          id: 1,
+          type: "image",
+          url: "Image url",
+        });
+      }).then(() => {
+        setCookie("DDcode", truncatedHashedResult)
+        window.location.href = "/manage?id="+ truncatedHashedResult
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
   }).catch((error) => {
     console.error(error);
   });
-
 }
 
 
