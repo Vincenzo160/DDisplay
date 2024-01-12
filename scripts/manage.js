@@ -60,6 +60,7 @@ get(child(dbRef, `display/`+DDcode)).then((snapshot) => {
         console.log("No data available");
         throwError("C404", false)
         document.getElementById("commands").style.display = "none";
+        document.getElementById("dashBottom").style.display = "none";
     }
 }).catch((error) => {
     console.error(error);
