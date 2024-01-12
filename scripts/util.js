@@ -15,9 +15,22 @@ function throwError(error,loud,long) {
     }
 }
 
+function toggleBtn(btn, message, state) {
+    const button = document.getElementById(btn);
+    if (state) {
+        button.disabled = true;
+        button.value = message;
+        button.className = 'btn-disabled';
+    } else {
+        button.disabled = false;
+        button.value = message;
+        button.className = 'home-btn3';
+    }
+}
+
 function setCookie(name,value) {
 
     document.cookie = name+"="+ value +"; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
 }
 
-export {getDDcode,throwError, setCookie}
+export {getDDcode,throwError, setCookie, toggleBtn}
