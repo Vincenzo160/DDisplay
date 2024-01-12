@@ -37,6 +37,12 @@ addslSEL.addEventListener("change", (event) => {
     var selection = event.target.value
     addSlide(selection)
 })
+document.getElementById('addslTXT').addEventListener('click', function(e) {
+    addSlide("text")
+});
+document.getElementById('addslIMG').addEventListener('click', function(e) {
+    addSlide("image")
+});
 document.getElementById('saveBTN').addEventListener('click', function(e) {
     save()
 });
