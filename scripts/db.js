@@ -25,7 +25,7 @@ function createDisplay() {
   const result = String(epochTime/randomNumber);
   console.log(result)
   const hashedResult = CryptoJS.SHA256(result).toString();
-  const truncatedHashedResult = hashedResult.substring(0, 15);
+  const truncatedHashedResult = hashedResult.substring(0, 7);
   console.log(hashedResult);
   console.log(truncatedHashedResult);
   const db = getDatabase();
