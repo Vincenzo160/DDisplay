@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-import { getDDcode, throwError, toggleBtn } from "/scripts/util.js";
+import { getDDcode, throwError, toggleBtn, copyToClipboard } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,10 +22,14 @@ const db = getDatabase();
 
 var DDcode = getDDcode()
 
-if (DDcode === null) {DDcode = "error"}
 console.log(DDcode)
 
-document.getElementById("id-display").innerHTML = DDcode;
+document.getElementById("id-display").innerHTML = DDcode+' <i id="copyid" style="font-size: 1.425rem; color: var(--small-text-color);" class="copy-icon fa fa-copy"></i>';
+
+if (DDcode === null) {
+    document.getElementById("id-display").innerHTML = 'Error <i id="copyid" class="fa fa-copy"></i>'
+    document.getElementById("copyid").style.display = "none";
+}
 
 document.getElementById('remslBTN').addEventListener('click', function(e) {
     removeSlide()
@@ -53,6 +57,9 @@ document.getElementById('saveBTN').addEventListener('click', function(e) {
 document.getElementById('viewBTN').addEventListener('click', function(e) {
     window.open("https://ddisplay.sgtbots.com/display?id="+DDcode, '_blank')
 });
+document.getElementById('copyid').addEventListener('click', function(e) {
+    copyToClipboard(DDcode, 'copyid')
+  });
 
 const dbRef = ref(getDatabase());
 get(child(dbRef, `display/`+DDcode)).then((snapshot) => {

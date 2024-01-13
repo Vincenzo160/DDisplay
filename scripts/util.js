@@ -37,4 +37,21 @@ function setCookie(name,value) {
     document.cookie = name+"="+ value +"; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
 }
 
-export {getDDcode,throwError, setCookie, toggleBtn}
+function copyToClipboard(data, id) {
+    navigator.clipboard.writeText(data)
+    .then(() => {
+      document.getElementById(id).style = "color:lime; font-size: 1.425rem;"
+      document.getElementById(id).classList = "fa fa-check"
+      setTimeout(function() {
+        document.getElementById(id).classList = "fa fa-copy"
+        document.getElementById(id).style = "font-size: 1.425rem; color: var(--small-text-color);"
+      }, 1900);
+      
+    })
+    .catch((err) => {
+      document.getElementById(id).classList = "fa fa-close"
+      document.getElementById(id).style = "color:red; font-size: 1.425rem;"
+    });
+}
+
+export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard}
