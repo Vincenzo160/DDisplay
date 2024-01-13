@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-import { getDDcode, throwError } from "/scripts/util.js";
+import { getDDcode, throwError, toggleBtn } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -38,9 +38,13 @@ addslSEL.addEventListener("change", (event) => {
     addSlide(selection)
 })
 document.getElementById('addslTXT').addEventListener('click', function(e) {
+    toggleBtn("addslTXT", "+", true, "add-btn-disabled")
+    toggleBtn("addslIMG", "+", true, "add-btn-disabled")
     addSlide("text")
 });
 document.getElementById('addslIMG').addEventListener('click', function(e) {
+    toggleBtn("addslTXT", "+", true, "add-btn-disabled")
+    toggleBtn("addslIMG", "+", true, "add-btn-disabled")
     addSlide("image")
 });
 document.getElementById('saveBTN').addEventListener('click', function(e) {

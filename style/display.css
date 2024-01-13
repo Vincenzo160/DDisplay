@@ -33,3 +33,18 @@ img {
     color: black;
     transform: scale(1.1)
 }
+
+.add-btn-disabled {
+  /* margin-top: 15px; */
+  width: 50px; /* Set the width */
+  height: 50px; /* Set the height */
+  border-radius: 50%; /* Make it a circle */
+  border: none;
+  background: #4e545c;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all .35s cubic-bezier(0.0, 0.9, 0.9, 1);;
+  animation-duration: 600ms;
+}

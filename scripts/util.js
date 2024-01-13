@@ -15,12 +15,16 @@ function throwError(error,loud,long) {
     }
 }
 
-function toggleBtn(btn, message, state) {
+function toggleBtn(btn, message, state, className) {
     const button = document.getElementById(btn);
     if (state) {
         button.disabled = true;
         button.value = message;
-        button.className = 'btn-disabled';
+        if (className !== undefined) {
+            button.className = className;
+        } else {
+            button.className = 'btn-disabled';
+        }
     } else {
         button.disabled = false;
         button.value = message;
