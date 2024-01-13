@@ -70,6 +70,8 @@ get(child(dbRef, `display/`+DDcode)).then((snapshot) => {
     console.error(error);
 });
 
+let isUnsaved = false;
+
 function PopulateDash(data) {
     var slide = 0
     while (slide <= data.info.count) {
@@ -87,6 +89,7 @@ function PopulateDash(data) {
             srcInput.type = "text"
             srcInput.id = "url"+slide
             srcInput.value = content.url
+            srcInput.addEventListener('change', () => { isUnsaved = true; });
             box.appendChild(srcInput);
         } else if (content.type === "text") {
             //text
@@ -94,6 +97,7 @@ function PopulateDash(data) {
             txtInput.id = "text"+slide
             txtInput.value = content.txt
             txtInput.setAttribute('maxlength', '60');
+            txtInput.addEventListener('change', () => { isUnsaved = true; });
             box.appendChild(txtInput);
             // Div
             let colDiv = document.createElement("div");
@@ -109,6 +113,7 @@ function PopulateDash(data) {
             colTxtInput.type = "color"
             colTxtInput.id = "txtColor"+slide
             colTxtInput.value = content.txtColor
+            colTxtInput.addEventListener('change', () => { isUnsaved = true; });
             colDiv.appendChild(colTxtInput);
             // br
             let brake = document.createElement("br");
@@ -122,6 +127,7 @@ function PopulateDash(data) {
             colBgInput.type = "color"
             colBgInput.id = "bgColor"+slide
             colBgInput.value = content.bgColor
+            colBgInput.addEventListener('change', () => { isUnsaved = true; });
             colDiv.appendChild(colBgInput);
         } else {
             throwError("D10"+slide,true,"Error Parsing "+slide)
@@ -146,6 +152,13 @@ function PopulateDash(data) {
     document.getElementById("dash").appendChild(box);
     document.getElementById("status-label").style.display = "none";
 }
+
+window.addEventListener('beforeunload', (event) => {
+    if (isUnsaved) {
+        event.preventDefault();
+        event.returnValue = '';
+    }
+});
 
 function save() {
     var slide = 0
