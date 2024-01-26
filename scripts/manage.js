@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-import { getDDcode, throwError, toggleBtn, copyToClipboard } from "/scripts/util.js";
+import { getDDcode, throwError, toggleBtn, copyToClipboard, unsaved } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -96,7 +96,7 @@ function PopulateDash(data) {
             srcInput.type = "text"
             srcInput.id = "url"+slide
             srcInput.value = content.url
-            srcInput.addEventListener('change', () => { isUnsaved = true; });
+            srcInput.addEventListener('change', () => { isUnsaved = true; unsaved(srcInput); });
             box.appendChild(srcInput);
         } else if (content.type === "text") {
             //text
@@ -104,7 +104,7 @@ function PopulateDash(data) {
             txtInput.id = "text"+slide
             txtInput.value = content.txt
             txtInput.setAttribute('maxlength', '60');
-            txtInput.addEventListener('change', () => { isUnsaved = true; });
+            txtInput.addEventListener('change', () => { isUnsaved = true; unsaved(txtInput); });
             box.appendChild(txtInput);
             // Div
             let colDiv = document.createElement("div");
@@ -120,7 +120,7 @@ function PopulateDash(data) {
             colTxtInput.type = "color"
             colTxtInput.id = "txtColor"+slide
             colTxtInput.value = content.txtColor
-            colTxtInput.addEventListener('change', () => { isUnsaved = true; });
+            colTxtInput.addEventListener('change', () => { isUnsaved = true; unsaved(colTxtInput); });
             colDiv.appendChild(colTxtInput);
             // br
             let brake = document.createElement("br");
@@ -134,7 +134,7 @@ function PopulateDash(data) {
             colBgInput.type = "color"
             colBgInput.id = "bgColor"+slide
             colBgInput.value = content.bgColor
-            colBgInput.addEventListener('change', () => { isUnsaved = true; });
+            colBgInput.addEventListener('change', () => { isUnsaved = true; unsaved(colBgInput); });
             colDiv.appendChild(colBgInput);
         } else {
             throwError("D10"+slide,true,"Error Parsing "+slide)
@@ -204,7 +204,17 @@ function save() {
             count: data,
             time: document.getElementById("Intime").value
         });
-
+        var inputElements = Array.from(document.getElementsByTagName("input"));
+        var textareaElements = Array.from(document.getElementsByTagName("textarea"));
+        var elements = inputElements.concat(textareaElements);
+        
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].classList.contains("unsaved-input")) {
+                elements[i].classList.remove("unsaved-input");
+            }
+        }
+        document.getElementById("saveWarning").style.display = "none";
+        isUnsaved = false
         } else {
             console.log("No data available");
             throwError("C404", false)

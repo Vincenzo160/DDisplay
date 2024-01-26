@@ -10,3 +10,7 @@
 .copy-icon {
     font-weight: 600; font-size: 1.825rem; margin: 1.3rem 0; margin-top: 8px; color: var(--small-text-color);
 }
+.unsaved-input {
+    /* color: red !important; */
+    border-color: orange !important;
+}

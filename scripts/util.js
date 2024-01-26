@@ -54,4 +54,11 @@ function copyToClipboard(data, id) {
     });
 }
 
-export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard}
+function unsaved(element) {
+    element.classList.add("unsaved-input");
+    console.log("Unsaved")
+    document.getElementById("saveWarning").style.display = "block";
+    
+}
+
+export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard, unsaved}
