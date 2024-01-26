@@ -154,6 +154,7 @@ function PopulateDash(data) {
     timeInput.type = "tel"
     timeInput.value = data.info.time
     timeInput.id = "Intime"
+    timeInput.addEventListener('change', () => { isUnsaved = true; unsaved(timeInput); });
     box.appendChild(title);
     box.appendChild(timeInput);
     document.getElementById("dash").appendChild(box);
