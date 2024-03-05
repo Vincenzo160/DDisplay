@@ -157,10 +157,10 @@ function PopulateDash(data) {
         psaTitle.align="left"
         psaTitle.innerHTML="PSA"
         boxPsa.appendChild(psaTitle);
-        let psaInput = document.createElement("input");
-        psaInput.type = "text"
+        let psaInput = document.createElement("textarea");
         psaInput.value = data.psa.txt
         psaInput.id = "psaTxt"
+        psaInput.setAttribute('maxlength', '90');
         psaInput.addEventListener('change', () => { isUnsaved = true; unsaved(psaInput); });
         boxPsa.appendChild(psaInput);
         // br
