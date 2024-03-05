@@ -37,12 +37,18 @@ function createDisplay() {
     } else {
       set(ref(db, 'display/' + truncatedHashedResult+"/info"), {
         count: 0,
+        psaBanner: true,
         time: 10000
       }).then(() => {
         return set(ref(db, 'display/' + truncatedHashedResult+"/content0"), {
           id: 1,
           type: "image",
           url: "Image url",
+        });
+      }).then(() => {
+        return set(ref(db, 'display/' + truncatedHashedResult+"/psa"), {
+          enabled: false,
+          txt: "PSA text"
         });
       }).then(() => {
         setCookie("DDcode", truncatedHashedResult)

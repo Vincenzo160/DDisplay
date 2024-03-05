@@ -144,6 +144,45 @@ function PopulateDash(data) {
         slide = slide+1
         console.log(slide)
     }
+    if (data.info.psaBanner) {
+        // TODO add proper separator betwen content and settings        
+        // br
+        let brk = document.createElement("br");
+        document.getElementById("dash").appendChild(brk);
+
+
+        let boxPsa = document.createElement("div");
+        boxPsa.className = "container"
+        let psaTitle = document.createElement("h2");
+        psaTitle.align="left"
+        psaTitle.innerHTML="PSA"
+        boxPsa.appendChild(psaTitle);
+        let psaInput = document.createElement("input");
+        psaInput.type = "text"
+        psaInput.value = data.psa.txt
+        psaInput.id = "psaTxt"
+        psaInput.addEventListener('change', () => { isUnsaved = true; unsaved(psaInput); });
+        boxPsa.appendChild(psaInput);
+        // br
+        let brake = document.createElement("br");
+        boxPsa.appendChild(brake);
+        // Div
+        let chkDiv = document.createElement("div");
+        chkDiv.align="left"
+        boxPsa.appendChild(chkDiv);
+        // Lable
+        let psaEnabLable = document.createElement("label");
+        psaEnabLable.innerHTML = "Enabled: "
+        chkDiv.appendChild(psaEnabLable);
+        let psaEnabled = document.createElement("input");
+        psaEnabled.type = "checkbox"
+        psaEnabled.id = "psaEnabled"
+        psaEnabled.checked = data.psa.enabled
+        psaEnabled.className="psaEnabled"
+        psaEnabled.addEventListener('change', () => { isUnsaved = true; unsaved(psaEnabled); });
+        chkDiv.appendChild(psaEnabled);
+        document.getElementById("dash").appendChild(boxPsa);
+    }
     var content = data[`content${slide}`]
     let box = document.createElement("div");
     box.className = "container"
@@ -159,6 +198,9 @@ function PopulateDash(data) {
     box.appendChild(timeInput);
     document.getElementById("dash").appendChild(box);
     document.getElementById("status-label").style.display = "none";
+
+
+
 }
 
 window.addEventListener('beforeunload', (event) => {
@@ -201,9 +243,17 @@ function save() {
             slide = slide+1
             console.log(slide)
         }
+        // PSA
+        if (document.getElementById("psaEnabled") !== null) {
+            set(ref(db, 'display/' + DDcode + '/psa'), {
+                enabled: document.getElementById("psaEnabled").checked,
+                txt: document.getElementById("psaTxt").value
+            });
+        }
         set(ref(db, 'display/' + DDcode + '/info'), {
             count: data,
-            time: document.getElementById("Intime").value
+            time: document.getElementById("Intime").value,
+            psaBanner: true
         });
         var inputElements = Array.from(document.getElementsByTagName("input"));
         var textareaElements = Array.from(document.getElementsByTagName("textarea"));
@@ -238,6 +288,7 @@ function addSlide(type) {
         });
         set(ref(db, 'display/' + DDcode + '/info'), {
             count: data+1,
+            psaBanner: true,
             time: document.getElementById("Intime").value
         });
         window.location.reload()
@@ -262,6 +313,7 @@ function removeSlide() {
             remove(ref(db, 'display/' + DDcode + '/content'+data))
             set(ref(db, 'display/' + DDcode + '/info'), {
                 count: data-1,
+                psaBanner: true,
                 time: document.getElementById("Intime").value
             });
             window.location.reload()

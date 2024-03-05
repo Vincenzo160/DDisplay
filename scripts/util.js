@@ -60,5 +60,9 @@ function unsaved(element) {
     document.getElementById("saveWarning").style.display = "block";
     
 }
+function psaBanner(txt) {
+    document.getElementById("psaBannerText").innerHTML = txt;
+    document.getElementById("psaBanner").style.display = "block";
+}
 
-export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard, unsaved}
+export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard, unsaved, psaBanner}

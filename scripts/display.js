@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-import { getDDcode, throwError } from "/scripts/util.js";
+import { getDDcode, throwError, psaBanner } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -54,6 +54,11 @@ get(child(dbRef, 'display/'+DDcode+'/info/time')).then((snapshot) => {
 });
 
 function startClock(delay) {
+    console.log("Starting clock")
+    if (data.info.psaBanner && data.psa.enabled) {
+        console.log("PSA: " + data.psa.txt)
+        psaBanner(data.psa.txt)
+    }
     document.getElementById("img-content").setAttribute("src", data.content0.url);
     document.getElementById("status-label").style.display = "none";
     var intCount = -1
