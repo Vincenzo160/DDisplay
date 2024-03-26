@@ -155,7 +155,7 @@ function PopulateDash(data) {
         boxPsa.className = "container"
         let psaTitle = document.createElement("h2");
         psaTitle.align="left"
-        psaTitle.innerHTML="PSA"
+        psaTitle.innerHTML="PSA Banner"
         boxPsa.appendChild(psaTitle);
         let psaInput = document.createElement("textarea");
         psaInput.value = data.psa.txt
@@ -188,10 +188,10 @@ function PopulateDash(data) {
     box.className = "container"
     let title = document.createElement("h2");
     title.align="left"
-    title.innerHTML="Settings"
+    title.innerHTML="Interval Time (Seconds)"
     let timeInput = document.createElement("input");
     timeInput.type = "tel"
-    timeInput.value = data.info.time
+    timeInput.value = data.info.time / 1000
     timeInput.id = "Intime"
     timeInput.addEventListener('change', () => { isUnsaved = true; unsaved(timeInput); });
     box.appendChild(title);
@@ -252,7 +252,7 @@ function save() {
         }
         set(ref(db, 'display/' + DDcode + '/info'), {
             count: data,
-            time: document.getElementById("Intime").value,
+            time: document.getElementById("Intime").value * 1000,
             psaBanner: true
         });
         var inputElements = Array.from(document.getElementsByTagName("input"));
