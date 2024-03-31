@@ -289,7 +289,7 @@ function addSlide(type) {
         set(ref(db, 'display/' + DDcode + '/info'), {
             count: data+1,
             psaBanner: true,
-            time: document.getElementById("Intime").value
+            time: document.getElementById("Intime").value * 1000
         });
         window.location.reload()
     } else {
@@ -314,7 +314,7 @@ function removeSlide() {
             set(ref(db, 'display/' + DDcode + '/info'), {
                 count: data-1,
                 psaBanner: true,
-                time: document.getElementById("Intime").value
+                time: document.getElementById("Intime").value * 1000
             });
             window.location.reload()
         } else {
