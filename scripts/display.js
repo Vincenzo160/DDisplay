@@ -62,10 +62,23 @@ function startClock(delay) {
     document.getElementById("img-content").setAttribute("src", data.content0.url);
     document.getElementById("status-label").style.display = "none";
     var intCount = -1
+    var maxTries = data.info.count+1;
     
     function execute() {
         if (intCount >= data.info.count) {intCount = -1}
         intCount = intCount +1
+        if (maxTries <= 0) {
+            console.log("All content is disabled");
+            throwError("C403", false)
+            return;
+        }
+        if (data[`content${intCount}`].disabled) {
+            console.log("Skipping " + intCount)
+            maxTries--
+            console.log("Tries left: " + maxTries)
+            execute()
+            return
+        } else { maxTries = data.info.count+1 }
         if (data === undefined || data === null) {
             console.log("Error: Data not found")
             return

@@ -140,6 +140,23 @@ function PopulateDash(data) {
             throwError("D10"+slide,true,"Error Parsing "+slide)
             window.location.replace("/")
         }
+        // br
+        let brk = document.createElement("br");
+        box.appendChild(brk);
+        // div
+        let colChkDiv = document.createElement("div"); 
+        colChkDiv.align="left"
+        box.appendChild(colChkDiv);
+        let colEnabLable = document.createElement("label");
+        colEnabLable.innerHTML = "Disabled: "
+        colChkDiv.appendChild(colEnabLable);
+        let colEnabled = document.createElement("input");
+        colEnabled.type = "checkbox"
+        colEnabled.id = "disable"+slide
+        colEnabled.checked = content.disabled
+        colEnabled.className="psaEnabled"
+        colEnabled.addEventListener('change', () => { isUnsaved = true; unsaved(colEnabled); });
+        colChkDiv.appendChild(colEnabled);
         document.getElementById("dash").appendChild(box);
         slide = slide+1
         console.log(slide)
@@ -225,19 +242,23 @@ function save() {
                 var bgColor = document.getElementById("bgColor"+slide).value
                 var txtColor = document.getElementById("txtColor"+slide).value
                 var txt = document.getElementById("text"+slide).value
+                var disable = document.getElementById("disable"+slide).checked
                 set(ref(db, 'display/' + DDcode + '/content'+slide), {
                     id: slide,
                     type: "text",
                     txt: txt,
                     txtColor: txtColor,
                     bgColor: bgColor,
-                    url: "https://placehold.co/"+resolution+"/"+bgColor.substring(1)+"/"+txtColor.substring(1)+"?text="+encodeURIComponent(txt)
+                    url: "https://placehold.co/"+resolution+"/"+bgColor.substring(1)+"/"+txtColor.substring(1)+"?text="+encodeURIComponent(txt),
+                    disabled: disable
                 });
             } else {
+                var disable = document.getElementById("disable"+slide).checked
                 set(ref(db, 'display/' + DDcode + '/content'+slide), {
                     id: slide,
                     type: "image",
                     url: document.getElementById("url"+slide).value,
+                    disabled: disable
                 });
             }
             slide = slide+1
@@ -283,7 +304,7 @@ function addSlide(type) {
 
         set(ref(db, 'display/' + DDcode + '/content'+(data+1)), {
             id: data+1,
-            type: type, // TODO: Implement in a non hardcoded way
+            type: type,
             url: "Image url",
         });
         set(ref(db, 'display/' + DDcode + '/info'), {
