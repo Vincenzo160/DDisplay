@@ -58,7 +58,7 @@ function addExtension(extId, extParams) {
           });
           toggleBtn("add-1", "Setting up", false)
           console.log("Success, Redirecting...")
-          // window.location.href = "/manage?id="+ DDcode;
+          window.location.href = "/manage?id="+ DDcode;
         })
   } else {
       console.log("No data available");

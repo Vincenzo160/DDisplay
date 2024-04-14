@@ -13,12 +13,12 @@
         "destination": "/pages/manage.html"
       },
       {
-        "source": "/display",
-        "destination": "/pages/display.html"
+        "source": "/manage/add/extension",
+        "destination": "/pages/addextension.html"
       },
       {
-        "source": "/display/add/extention",
-        "destination": "/pages/addextention.html"
+        "source": "/display",
+        "destination": "/pages/display.html"
       },
       {
         "source": "**",

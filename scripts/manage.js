@@ -57,6 +57,9 @@ document.getElementById('saveBTN').addEventListener('click', function(e) {
 document.getElementById('viewBTN').addEventListener('click', function(e) {
     window.open("https://ddisplay.sgtbots.com/display?id="+DDcode, '_blank')
 });
+document.getElementById('viewBTN').addEventListener('click', function(e) {
+    window.location.href = "/manage/add/extension?id="+ DDcode;
+});
 document.getElementById('copyid').addEventListener('click', function(e) {
     copyToClipboard(DDcode, 'copyid')
   });
@@ -136,6 +139,19 @@ function PopulateDash(data) {
             colBgInput.value = content.bgColor
             colBgInput.addEventListener('change', () => { isUnsaved = true; unsaved(colBgInput); });
             colDiv.appendChild(colBgInput);
+        } else if (content.type === "extension") {
+            //div
+            let colDiv = document.createElement("div");
+            colDiv.align="left"
+            box.appendChild(colDiv);
+            // p
+            let p = document.createElement("p");
+            let extSetting = content.extParams;
+            delete extSetting.id
+            let formattedString = Object.entries(extSetting).map(([key, value]) => `${key}: ${value}`).join(', ');
+            console.log(formattedString);
+            p.innerHTML = "Extension ID: "+content.extId +  "<br> Settings: "+formattedString
+            colDiv.appendChild(p);
         } else {
             throwError("D10"+slide,true,"Error Parsing "+slide)
             window.location.replace("/")
@@ -230,11 +246,22 @@ window.addEventListener('beforeunload', (event) => {
 function save() {
     var slide = 0
     var DDcode = getDDcode()
-    get(child(dbRef, `display/`+DDcode+'/info/count')).then((snapshot) => {
+    get(child(dbRef, `display/`+DDcode)).then((snapshot) => {
     const data = snapshot.val()
     if (snapshot.exists()) {
         console.log(snapshot.val());
-        while (slide <= data) {
+
+        processSlides(slide, data);
+        async function processSlides(slide, data) {
+            while (slide <= data.info.count) {
+                await saveDb(slide, data);
+                slide = slide + 1;
+                console.log(slide);
+            }
+        }
+            
+        function saveDb(slide,data) {
+            const content = data[`content${slide}`]
             var type = document.getElementById("type"+slide).innerHTML.replace(/\d|\s|\./g, '');
             console.log(type)
             if (type === "text") {
@@ -243,7 +270,7 @@ function save() {
                 var txtColor = document.getElementById("txtColor"+slide).value
                 var txt = document.getElementById("text"+slide).value
                 var disable = document.getElementById("disable"+slide).checked
-                set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                return set(ref(db, 'display/' + DDcode + '/content'+slide), {
                     id: slide,
                     type: "text",
                     txt: txt,
@@ -251,19 +278,30 @@ function save() {
                     bgColor: bgColor,
                     url: "https://placehold.co/"+resolution+"/"+bgColor.substring(1)+"/"+txtColor.substring(1)+"?text="+encodeURIComponent(txt),
                     disabled: disable
-                });
-            } else {
+                })
+            } else if (type === "image") {
                 var disable = document.getElementById("disable"+slide).checked
-                set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                return set(ref(db, 'display/' + DDcode + '/content'+slide), {
                     id: slide,
                     type: "image",
                     url: document.getElementById("url"+slide).value,
                     disabled: disable
-                });
+                })
+            } else if (type === "extension") {
+                console.log(content)
+                // console.log(slide)
+                var disable = document.getElementById("disable"+slide).checked
+                return set(ref(db, 'display/' + DDcode + '/content'+slide), {
+                    id: slide,
+                    type: "extension",
+                    extId: content.extId,
+                    disabled: disable
+                }).then(() => {
+                    set(ref(db, 'display/' + DDcode + '/content'+slide+'/extParams'), content.extParams)
+                })
             }
-            slide = slide+1
-            console.log(slide)
         }
+        
         // PSA
         if (document.getElementById("psaEnabled") !== null) {
             set(ref(db, 'display/' + DDcode + '/psa'), {
@@ -272,7 +310,7 @@ function save() {
             });
         }
         set(ref(db, 'display/' + DDcode + '/info'), {
-            count: data,
+            count: data.info.count,
             time: document.getElementById("Intime").value * 1000,
             psaBanner: true
         });
