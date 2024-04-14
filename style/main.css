@@ -480,7 +480,9 @@ header {
         -moz-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
-
+    .feature p {
+        margin: 1px 0
+    }
     .feature:hover {
         -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
         -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);

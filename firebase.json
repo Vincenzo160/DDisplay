@@ -17,6 +17,10 @@
         "destination": "/pages/display.html"
       },
       {
+        "source": "/display/add/extention",
+        "destination": "/pages/addextention.html"
+      },
+      {
         "source": "**",
         "destination": "pages/index.html"
       }
