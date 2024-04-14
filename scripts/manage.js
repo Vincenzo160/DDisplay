@@ -57,7 +57,7 @@ document.getElementById('saveBTN').addEventListener('click', function(e) {
 document.getElementById('viewBTN').addEventListener('click', function(e) {
     window.open("https://ddisplay.sgtbots.com/display?id="+DDcode, '_blank')
 });
-document.getElementById('viewBTN').addEventListener('click', function(e) {
+document.getElementById('addextBTN').addEventListener('click', function(e) {
     window.location.href = "/manage/add/extension?id="+ DDcode;
 });
 document.getElementById('copyid').addEventListener('click', function(e) {
