@@ -150,7 +150,7 @@ function PopulateDash(data) {
             delete extSetting.id
             let formattedString = Object.entries(extSetting).map(([key, value]) => `${key}: ${value}`).join(', ');
             console.log(formattedString);
-            p.innerHTML = "Extension ID: "+content.extId +  "<br> Settings: "+formattedString
+            p.innerHTML = "Extension ID: "+content.extId +  "<br> Extension settings: "+formattedString
             colDiv.appendChild(p);
         } else {
             throwError("D10"+slide,true,"Error Parsing "+slide)
