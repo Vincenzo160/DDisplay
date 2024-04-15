@@ -79,14 +79,19 @@ document.getElementById('cust-1').addEventListener('click', function(e) {
 document.getElementById('add-1').addEventListener('click', function(e) {
   console.log("Add 1")
   toggleBtn("add-1", "Adding...", true)
-  var city = document.getElementById('ext1-city').value;
-  if (city === "" || city === null || city === undefined) {
-    alert("Please enter a city")
+  var lat = document.getElementById('ext1-lat').value;
+  var lon = document.getElementById('ext1-lon').value;
+  var lang = document.getElementById('ext1-language').value;
+
+  if (lat === "" || lat === null || lat === undefined || lon === "" || lon === null || lon === undefined) {
+    alert("Please enter valid coordinates")
     toggleBtn("add-1", "Add", false)
     return
   }
   var extParams = {
-    city: city
+    lat: lat,
+    lon: lon,
+    displayLang: lang
   }
   addExtension("weather", extParams)
 });

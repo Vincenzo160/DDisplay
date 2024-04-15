@@ -86,7 +86,18 @@ function startClock(delay) {
         console.log("int:"+intCount)
     
         console.log(data[`content${intCount}`].url)
-        document.getElementById("img-content").setAttribute("src", data[`content${intCount}`].url);
+        if (data[`content${intCount}`].type === "extension") {
+            document.getElementById("img-content").style.display = "none";
+            console.log("Extension")
+            document.getElementById("ext-content").style.display = "block";
+            document.getElementById("ext-content").setAttribute("src", ("https://ddisplay.sgtbots.com/display/extensions/" + data[`content${intCount}`].extId + "?id=" + DDcode+"&ctn="+intCount));
+            // document.getElementById("ext-content").setAttribute("src", ("http://127.0.0.1:5500/extensions/" + data[`content${intCount}`].extId + "/" + data[`content${intCount}`].extId + ".html?id=" + DDcode+"&ctn="+intCount));
+
+        } else {
+            document.getElementById("ext-content").style.display = "none";
+            document.getElementById("img-content").style.display = "block";
+            document.getElementById("img-content").setAttribute("src", data[`content${intCount}`].url);
+        }
         if (data[`content${intCount}`].type === "text") {
             document.body.style.backgroundColor = data[`content${intCount}`].bgColor
         } else {

@@ -1,0 +1,37 @@
+<head>
+  <link rel="icon" href="https://sgt-bots.github.io/SGT-Bots-Website/assets/favcon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">   
+  <!-- <link id="stylesheet" rel="stylesheet" href="/style/main.css"> -->
+  <link id="stylesheet" rel="stylesheet" href="/extensions/weather/style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/qweather-icons@1.6.0/font/qweather-icons.css" rel="stylesheet">
+  <script src="/extensions/weather/weather.js" type="module"></script>
+</head>
+
+<body>
+  <div class="weather-info">
+    <div class="icon">
+      <i id="forecast-icon" class="qi-100" aria-hidden="true"></i>
+    </div>
+    <div class="details">
+      <div class="temp">
+        <i class="fa fa-thermometer-half" aria-hidden="true"></i>
+        <span id="temp">Current: 00.0°C</span>
+      </div>
+      <div class="temp">
+        <i class="fa fa-thermometer" aria-hidden="true"></i>
+        <span id="temps">Max: 00.0°C, Min: 00.0°C</span>
+      </div>
+      <div class="wind">
+        <i class="qi-2208" aria-hidden="true"></i>
+        <span id="wind">Wind Speed: 00.0km/h</span>
+      </div>
+      <div class="uv">
+        <i class="fa fa-sun-o" aria-hidden="true"></i>
+        <span id="uv">UV Index: 0.0</span>
+      </div>
+    </div>
+  </div>
+  <p class="source">Source: open-meteo.com</p>
+</body>

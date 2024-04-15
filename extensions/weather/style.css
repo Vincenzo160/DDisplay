@@ -1,0 +1,66 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.weather-info {
+display: flex;
+align-items: center;
+justify-content: center; /* Change this from space-between to center */
+background-color: #f0f0f0; 
+border-radius: 10px;
+padding: 20px;
+width: 70%;
+height: 60%;
+margin: 0 auto;
+}
+
+.icon {
+margin-right: 20px;
+margin-left: 8%;
+font-size: 3em;
+border-right: 1px solid #000;
+padding-right: 10px;
+flex: 1;
+}
+
+.details {
+flex: 3;
+margin-left: 20px;
+}
+.details > div {
+display: flex;
+justify-content: flex-start;
+margin-bottom: 10px;
+}
+
+.details > div i {
+width: 4vw;
+text-align: center;
+margin-right: 10px;
+}
+
+.weather-info .icon {
+height: auto; /* maintain aspect ratio */
+font-size: 13vw;
+}
+
+.weather-info .details {
+font-size: 3.2vw; /* adjust as needed */
+}
+
+.source {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+* {
+font-family: 'Poppins', sans-serif;
+}

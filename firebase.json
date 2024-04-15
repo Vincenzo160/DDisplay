@@ -21,6 +21,10 @@
         "destination": "/pages/display.html"
       },
       {
+        "source": "/display/extensions/weather",
+        "destination": "/extensions/weather/weather.html"
+      },
+      {
         "source": "**",
         "destination": "pages/index.html"
       }
