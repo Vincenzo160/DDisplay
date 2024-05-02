@@ -39,16 +39,22 @@ document.getElementById('addslBTN').addEventListener('click', function(e) {
 });
 addslSEL.addEventListener("change", (event) => {
     var selection = event.target.value
-    addSlide(selection)
+    if (selection === "extension") {
+        window.location.href = "/manage/add/extension?id="+ DDcode;
+    } else {
+        addSlide(selection)
+    }
 })
 document.getElementById('addslTXT').addEventListener('click', function(e) {
     toggleBtn("addslTXT", "+", true, "add-btn-disabled")
     toggleBtn("addslIMG", "+", true, "add-btn-disabled")
+    toggleBtn("addextBTN", "+", true, "add-btn-disabled")
     addSlide("text")
 });
 document.getElementById('addslIMG').addEventListener('click', function(e) {
     toggleBtn("addslTXT", "+", true, "add-btn-disabled")
     toggleBtn("addslIMG", "+", true, "add-btn-disabled")
+    toggleBtn("addextBTN", "+", true, "add-btn-disabled")
     addSlide("image")
 });
 document.getElementById('saveBTN').addEventListener('click', function(e) {

@@ -73,6 +73,7 @@ function populateMeteo(data, lang) {
     document.getElementById("uv").innerHTML = "Indice UV: "+data.daily.uv_index_max;
     document.getElementById("wind").innerHTML = "Velocità Vento: "+data.current.wind_speed_10m + "Km/h";
     document.getElementById("temp").innerHTML = "Attuale: "+data.current.temperature_2m + "°C";
+    document.getElementById("source").innerHTML = "Fonte: open-meteo.com";
   } else {
     document.getElementById("temps").innerHTML = "Max: "+data.daily.temperature_2m_max + "°C" + " Min: "+data.daily.temperature_2m_min + "°C";
     document.getElementById("uv").innerHTML = "UV Index: "+data.daily.uv_index_max;
