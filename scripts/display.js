@@ -91,7 +91,7 @@ function startClock(delay) {
             console.log("Extension")
             document.getElementById("ext-content").style.display = "block";
             document.getElementById("ext-content").setAttribute("src", ("https://ddisplay.sgtbots.com/display/extensions/" + data[`content${intCount}`].extId + "?id=" + DDcode+"&ctn="+intCount));
-            // document.getElementById("ext-content").setAttribute("src", ("http://127.0.0.1:5500/extensions/" + data[`content${intCount}`].extId + "/" + data[`content${intCount}`].extId + ".html?id=" + DDcode+"&ctn="+intCount));
+            // document.getElementById("ext-content").setAttribute("src", ("http://127.0.0.1:5500/extensions/" + data[`content${intCount}`].extId + "/" + data[`content${intCount}`].extId + ".html?id=" + DDcode+"&ctn="+intCount)); // Local testing
 
         } else {
             document.getElementById("ext-content").style.display = "none";
