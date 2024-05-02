@@ -5,7 +5,9 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      ".github",
+      ".git/**"
     ],
     "rewrites": [
       {
@@ -13,8 +15,16 @@
         "destination": "/pages/manage.html"
       },
       {
+        "source": "/manage/add/extension",
+        "destination": "/pages/addextension.html"
+      },
+      {
         "source": "/display",
         "destination": "/pages/display.html"
+      },
+      {
+        "source": "/display/extensions/weather",
+        "destination": "/extensions/weather/weather.html"
       },
       {
         "source": "**",
