@@ -94,6 +94,6 @@ document.getElementById('add-1').addEventListener('click', function(e) {
     lon: lon,
     displayLang: lang
   }
-  // addExtension("weather", extParams)
+  addExtension("weather", extParams)
 });
 
