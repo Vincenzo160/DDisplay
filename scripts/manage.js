@@ -41,8 +41,10 @@ addslSEL.addEventListener("change", (event) => {
     var selection = event.target.value
     if (selection === "extension") {
         window.location.href = "/manage/add/extension?id="+ DDcode;
-    } else {
+    } else if (selection === "text" || selection === "image") {
         addSlide(selection)
+    } else {
+        console.log("Invalid selection")
     }
 })
 document.getElementById('addslTXT').addEventListener('click', function(e) {
