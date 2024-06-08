@@ -24,7 +24,7 @@ var DDcode = getDDcode()
 
 console.log(DDcode)
 
-document.getElementById("id-display").innerHTML = DDcode+' <i id="copyid" style="font-size: 1.425rem; color: var(--small-text-color);" class="copy-icon fa fa-copy"></i>';
+document.getElementById("id-display").innerHTML = DDcode+' <i id="copyid" style="font-size: 1.425rem; color: var(--small-text-color);" class="fa fa-copy"></i>';
 
 if (DDcode === null) {
     document.getElementById("id-display").innerHTML = 'Error <i id="copyid" class="fa fa-copy"></i>'
