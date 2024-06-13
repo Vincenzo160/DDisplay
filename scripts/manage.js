@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 import { getDDcode, throwError, toggleBtn, copyToClipboard, unsaved } from "/scripts/util.js";
+import { getData } from "/scripts/db.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -43,6 +44,34 @@ addslSEL.addEventListener("change", (event) => {
         window.location.href = "/manage/add/extension?id="+ DDcode;
     } else if (selection === "text" || selection === "image") {
         addSlide(selection)
+    } else {
+        console.log("Invalid selection")
+    }
+})
+expBTN.addEventListener("change", (event) => {
+    var selection = event.target.value
+    if (selection === "json") {
+        getData().then(data => {
+            
+            const jsonData = JSON.stringify(data, null, '  ')
+            console.log(data)
+            console.log(jsonData)
+            
+            var blob = new Blob([jsonData], {type: "application/json"}),
+            url = URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.download = DDcode + ".json";
+            a.href = url;
+            a.textContent = "Download data.json";
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.location.reload()
+          }).catch(error => {
+            console.error(error);
+          });
     } else {
         console.log("Invalid selection")
     }

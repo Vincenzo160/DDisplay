@@ -2,6 +2,7 @@
 import { setCookie } from "/scripts/util.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+import { getDDcode } from "/scripts/util.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -61,6 +62,19 @@ function createDisplay() {
     console.error(error);
   });
 }
+function getData() {
+  return new Promise((resolve, reject) => {
+    const db = getDatabase();
+    const displayRef = ref(db, 'display/' + getDDcode());
+    onValue(displayRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      resolve(data);
+    }, (error) => {
+      console.error(error);
+      reject(error);
+    });
+  });
+}
 
-
-export { createDisplay }
+export { createDisplay, getData }
