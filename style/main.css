@@ -464,6 +464,25 @@ header {
         background-color: transparent;
     }
 
+    .recent-box {
+        background: none;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        -webkit-box-flex: 1;
+        flex: 1;
+        display: -webkit-box;
+        display: flex;
+        flex-wrap: wrap;
+        border: 2px solid var(--third-color);
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     .feature {
         background: none;
         margin: 20px;
@@ -695,6 +714,17 @@ textarea:focus {
     nav .categorys span {
         padding: 7px 15px;
     }
+    .recent-box {
+        text-align: center;
+        flex-direction: column;
+    }
+    .recent-box>* {
+        margin-top: 10px;
+    }
+    .recent-buttons>* {
+        margin-top: 100px;
+        padding: 8px 20px;
+    }
 }
 
 @media all and (max-width:900px) {
@@ -730,6 +760,7 @@ textarea:focus {
         margin-left: 0px;
         margin-right: 0px;
     }
+
     
 }
 

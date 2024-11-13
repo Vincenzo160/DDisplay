@@ -37,6 +37,23 @@ function setCookie(name,value) {
     document.cookie = name+"="+ value +"; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
 }
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return null;
+}
+
+
 function copyToClipboard(data, id) {
     navigator.clipboard.writeText(data)
     .then(() => {
@@ -65,4 +82,4 @@ function psaBanner(txt) {
     document.getElementById("psaBanner").style.display = "block";
 }
 
-export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard, unsaved, psaBanner}
+export {getDDcode,throwError, setCookie, toggleBtn, copyToClipboard, unsaved, psaBanner, getCookie}
