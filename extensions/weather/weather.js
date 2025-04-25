@@ -91,11 +91,14 @@ function getMeteo(data) {
   fetch("https://api.open-meteo.com/v1/forecast?latitude="+data.lat+"&longitude="+data.lon+"&current=temperature_2m,is_day,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,uv_index_max&timezone=auto&forecast_days=1")
     .then(response => response.json())
     .then(Wdata => {
-      console.log(Wdata);
+      localStorage.setItem("Meteo", JSON.stringify(Wdata));
+      localStorage.setItem("lang", data.displayLang);
+      localStorage.setItem("contentID", contentID);
+      console.log("Cache updated");
       populateMeteo(Wdata, data.displayLang)
 
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error('Error fetching meteo:', error));
 }
 
 
@@ -118,17 +121,20 @@ function setBackground() {
   }
 }
 
-// Call setBackground at regular intervals
-setInterval(setBackground, 1000 * 60 * 60); // Update every hour
+setInterval(setBackground, 1000 * 60 * 60);
 
-// Call setBackground when the page loads
 window.onload = setBackground;
 
+const cachedMeteo = JSON.parse(localStorage.getItem("Meteo"));
+if (!(cachedMeteo === null) && contentID === localStorage.getItem("contentID")) {
+  console.log("Using cache");
+  
+  populateMeteo(cachedMeteo, localStorage.getItem("lang"));
+}
 
 get(child(dbRef, `display/`+DDcode+'/content'+contentID+'/extParams')).then((snapshot) => {
   const data = snapshot.val()
   if (snapshot.exists()) {
-      console.log(snapshot.val());
       getMeteo(data)
     } else {
         console.log("No data available");
