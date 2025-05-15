@@ -94,6 +94,7 @@ function getMeteo(data) {
       localStorage.setItem("Meteo", JSON.stringify(Wdata));
       localStorage.setItem("lang", data.displayLang);
       localStorage.setItem("contentID", contentID);
+      localStorage.setItem("timestamp", Date.now());
       console.log("Cache updated");
       populateMeteo(Wdata, data.displayLang)
 
@@ -124,10 +125,10 @@ function setBackground() {
 setInterval(setBackground, 1000 * 60 * 60);
 
 window.onload = setBackground;
-
+const timestamp = localStorage.getItem("timestamp");
 const cachedMeteo = JSON.parse(localStorage.getItem("Meteo"));
-if (!(cachedMeteo === null) && contentID === localStorage.getItem("contentID")) {
-  console.log("Using cache");
+if (!(cachedMeteo === null) && contentID === localStorage.getItem("contentID") && (Date.now() - timestamp < 43200000)) { // 12h
+  console.log("Using cache, cache is " + (Date.now() - timestamp) + " old");
   
   populateMeteo(cachedMeteo, localStorage.getItem("lang"));
 }
