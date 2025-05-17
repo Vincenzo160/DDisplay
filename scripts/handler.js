@@ -32,7 +32,7 @@ document.getElementById('connectManage').addEventListener('click', function(e) {
 document.getElementById('connectDisplayRecent').addEventListener('click', function(e) {
     var recentDisplay = getCookie("DDcode")
     if (recentDisplay !== null) {
-        toggleBtn("connectManageRecent", "Connecting...", true)
+        toggleBtn("connectDisplayRecent", "Connecting...", true)
         window.location.href = "/display?id="+ recentDisplay
     } else {
         alert("No Recent Display")
